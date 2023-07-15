@@ -34,7 +34,7 @@ public class HealthObject : MonoBehaviour
         HealthBar.value = CurrentHP;
     }
 
-    public void Die()
+    public virtual void Die()
     {
         gameObject.SetActive(false);
     }
