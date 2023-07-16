@@ -22,7 +22,7 @@ public class Arrow : MonoBehaviour
         }
     }
     
-    void OnCollisionEnter2D(Collider2D collider)
+    void OnCollisionEnter2D(Collision2D collider)
     {
 
     }
