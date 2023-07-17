@@ -33,7 +33,10 @@ public class Monster : HealthObject
         }
         else if(Timer <= 0)
         {
-            Attack();
+            Timer = AttackTerm;
+            rigid.velocity = Vector2.zero;
+            animator.SetBool("Walk", false);
+            animator.SetTrigger("Attack");
         }
         else
         {
@@ -43,9 +46,6 @@ public class Monster : HealthObject
 
     public void Attack()
     {
-        rigid.velocity = Vector2.zero;
-        animator.SetBool("Walk", false);
-        animator.SetTrigger("Attack");
-        Timer = AttackTerm;
+        ScanObject.collider.GetComponent<Castle>().TakeDamage(Atk);
     }
 }

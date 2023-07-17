@@ -6,10 +6,12 @@ public class Castle : HealthObject
 {
     private void Update()
     {
+        /*
         if (Input.GetKeyDown(KeyCode.Space))
         {
             TakeDamage(100);
         }
+        */
     }
 
     public override void Die()
