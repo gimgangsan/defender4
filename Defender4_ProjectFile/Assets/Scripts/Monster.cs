@@ -1,33 +1,51 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Threading;
 
-public abstract class Monster : HealthObject
+public class Monster : HealthObject
 {
     RaycastHit2D ScanObject;
     Rigidbody2D rigid;
-    public float AttackRange, WalkSpeed;
-    public int HP, Atk;
+    Animator animator;
+    float Timer = 0;
+
+    public float AttackRange, WalkSpeed, AttackTerm;
+    public int Atk;
 
     // Start is called before the first frame update
     void Start()
     {
         rigid = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        ScanObject = Physics2D.Raycast(rigid.position, Vector2.left, AttackRange);
-        if(ScanObject.transform.CompareTag("Barrier"))
+        Debug.DrawRay(rigid.position, Vector2.left);
+        ScanObject = Physics2D.Raycast(rigid.position, Vector2.left, AttackRange, LayerMask.GetMask("Barrier"));
+
+        if(ScanObject.collider == null)
         {
-            Attack();
+            animator.SetBool("Walk", true);
+            rigid.velocity = Vector2.left * WalkSpeed;
+        }
+        else if(Timer <= 0)
+        {
+            Timer = AttackTerm;
+            rigid.velocity = Vector2.zero;
+            animator.SetBool("Walk", false);
+            animator.SetTrigger("Attack");
         }
         else
         {
-            rigid.velocity = Vector2.left * WalkSpeed;
+            Timer -= Time.deltaTime;
         }
     }
 
-    public abstract void Attack();
+    public void Attack()
+    {
+        ScanObject.collider.GetComponent<Castle>().TakeDamage(Atk);
+    }
 }

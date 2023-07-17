@@ -11,8 +11,6 @@ public class PoolManager : ObjectPool
         {
             Pools[i] = new List<GameObject>();
         }
-
-        Get(0);
     }
 
     public override GameObject Get(int type)
