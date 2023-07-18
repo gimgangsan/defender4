@@ -6,38 +6,25 @@ public class Crossbow : MonoBehaviour
 {
     float angle;
     Vector2 target, mouse;
-    Arrow arrow;
+    PoolManager pool;
 
     void Start()
     {
         target = transform.position;
-        arrow = GameObject.Find("Arrow").GetComponent<Arrow>();
+        pool = GameObject.Find("PoolManager").GetComponent<PoolManager>();
+
     }
 
     void Update()
     {
         mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         angle = Mathf.Atan2(mouse.y - target.y, mouse.x - target.x) * Mathf.Rad2Deg;
-        this.transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
-        if (Input.GetMouseButton(0))
+        this.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        if (Input.GetMouseButtonDown(0))
         {
-            if (arrow.speed < 10)
-            {
-                arrow.speed += Time.deltaTime;
-            }
-            else
-            {
-                arrow.speed = 10;
-            }
+            Arrow script = pool.Get(1).GetComponent<Arrow>();
+            script.Position(this.transform.position);
+            script.Rotation(Quaternion.AngleAxis(angle, Vector3.forward));
         }
-        else if (Input.GetMouseButtonUp(0))
-        {
-            SpawnArrow();
-        }
-            
-    }
-    void SpawnArrow()
-    {
-
     }
 }
