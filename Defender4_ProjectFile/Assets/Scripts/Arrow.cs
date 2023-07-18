@@ -20,8 +20,17 @@ public class Arrow : MonoBehaviour
         {
             gameObject.SetActive(false);
         }
+        
     }
     
+    public void Position(Vector2 position)
+    {
+        transform.position = position;
+    }
+    public void Rotation(Quaternion rotation)
+    {
+        transform.rotation = rotation;
+    }
     void OnCollisionEnter2D(Collision2D collider)
     {
 
