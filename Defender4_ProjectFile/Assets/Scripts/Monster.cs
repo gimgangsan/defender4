@@ -48,4 +48,9 @@ public class Monster : HealthObject
     {
         ScanObject.collider.GetComponent<Castle>().TakeDamage(Atk);
     }
+
+    public void SetPosition(Vector2 NewPosition)
+    {
+        transform.position = NewPosition;
+    }
 }

@@ -20,7 +20,7 @@ public class Spawner : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             GameObject a = ManagerScript.Get(0);
-            a.transform.position = new Vector2(Spawn_x, Spawn_y[Random.Range(0, Spawn_y.Length)]);
+            a.GetComponent<Monster>().SetPosition(new Vector2(Spawn_x, Spawn_y[Random.Range(0, Spawn_y.Length)]));
         }
     }
 }
