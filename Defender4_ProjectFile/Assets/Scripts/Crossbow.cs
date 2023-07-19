@@ -5,7 +5,7 @@ using UnityEngine;
 public class Crossbow : MonoBehaviour
 {
     float angle;
-    float cooltime = 0;
+    public float cooltime = 0;
     Vector2 target, mouse;
     PoolManager pool;
 
@@ -21,12 +21,12 @@ public class Crossbow : MonoBehaviour
         mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         angle = Mathf.Atan2(mouse.y - target.y, mouse.x - target.x) * Mathf.Rad2Deg;
         this.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButton(0))
         {
             if (cooltime <= 0)
             {
                 SpawnArrow();
-                cooltime = 1;
+                cooltime = 0.25f;
             }
             
         }

@@ -1,22 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Castle : HealthObject
 {
-    private void Update()
-    {
-        /*
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            TakeDamage(100);
-        }
-        */
-    }
-
+    public GameObject GameOverMenu;
     public override void Die()
     {
-        Debug.Log("¼º »Ñ¼ÅÁü. °ÔÀÓ¿À¹ö Ã¢ ¶ç¿ì±â°¡ ÇÊ¿äÇÔ");
+        GameOverMenu.SetActive(true);
         base.Die();
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

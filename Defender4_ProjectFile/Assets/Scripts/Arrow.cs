@@ -30,8 +30,11 @@ public class Arrow : MonoBehaviour
     {
         transform.rotation = rotation;
     }
-    void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        gameObject.SetActive(false);
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            gameObject.SetActive(false);
+        }
     }
 }

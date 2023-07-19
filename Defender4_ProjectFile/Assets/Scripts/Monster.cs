@@ -46,12 +46,15 @@ public class Monster : HealthObject
 
     public void Attack()
     {
-        ScanObject.collider.GetComponent<Castle>().TakeDamage(Atk);
+        if(ScanObject.collider != null)
+        {
+            ScanObject.collider.GetComponent<Castle>().TakeDamage(Atk);
+        }
     }
     
     public void Damaged()
     {
-        this.TakeDamage(50);
+        this.TakeDamage(25);
     }
 
     public void SetPosition(Vector2 NewPosition)
@@ -59,9 +62,9 @@ public class Monster : HealthObject
         transform.position = NewPosition;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.CompareTag("Arrow"))
+        if (collision.gameObject.CompareTag("Arrow"))
         {
             Damaged();
         }

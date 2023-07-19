@@ -126,7 +126,7 @@ MonoBehaviour:
   AttackRange: 1
   WalkSpeed: 2
   AttackTerm: 2
-  Atk: 1
+  Atk: 20
 --- !u!50 &5920244044575704261
 Rigidbody2D:
   serializedVersion: 4
