@@ -5,6 +5,7 @@ using UnityEngine;
 public class Crossbow : MonoBehaviour
 {
     float angle;
+    float cooltime = 0;
     Vector2 target, mouse;
     PoolManager pool;
 
@@ -22,9 +23,20 @@ public class Crossbow : MonoBehaviour
         this.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         if (Input.GetMouseButtonDown(0))
         {
-            Arrow script = pool.Get(1).GetComponent<Arrow>();
-            script.Position(this.transform.position);
-            script.Rotation(Quaternion.AngleAxis(angle, Vector3.forward));
+            if (cooltime <= 0)
+            {
+                SpawnArrow();
+                cooltime = 1;
+            }
+            
         }
+        cooltime -= Time.deltaTime;
+    }
+
+    void SpawnArrow()
+    {
+        Arrow script = pool.Get(1).GetComponent<Arrow>();
+        script.Position(this.transform.position);
+        script.Rotation(Quaternion.AngleAxis(angle, Vector3.forward));
     }
 }

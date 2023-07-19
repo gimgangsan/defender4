@@ -23,7 +23,7 @@ public class HealthObject : MonoBehaviour
         CurrentHP -= damage;
         HandleHpBar();
 
-        if(CurrentHP < 0)
+        if(CurrentHP <= 0)
         {
             Die();
         }

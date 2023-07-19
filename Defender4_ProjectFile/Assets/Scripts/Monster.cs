@@ -48,9 +48,22 @@ public class Monster : HealthObject
     {
         ScanObject.collider.GetComponent<Castle>().TakeDamage(Atk);
     }
+    
+    public void Damaged()
+    {
+        this.TakeDamage(50);
+    }
 
     public void SetPosition(Vector2 NewPosition)
     {
         transform.position = NewPosition;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.CompareTag("Arrow"))
+        {
+            Damaged();
+        }
     }
 }

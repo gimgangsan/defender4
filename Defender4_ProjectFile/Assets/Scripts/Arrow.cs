@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class Arrow : MonoBehaviour
 {
-    Rigidbody2D rigid;
     public float speed;
-    public int damage;
+    Rigidbody2D rigid;
 
     void Start()
     {
@@ -31,8 +30,8 @@ public class Arrow : MonoBehaviour
     {
         transform.rotation = rotation;
     }
-    void OnCollisionEnter2D(Collision2D collider)
+    void OnCollisionEnter2D(Collision2D collision)
     {
-
+        gameObject.SetActive(false);
     }
 }
