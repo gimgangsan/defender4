@@ -12,15 +12,14 @@ public class Spawner : MonoBehaviour
     void Start()
     {
         ManagerScript = PoolManager.GetComponent<ObjectPool>();
+        Invoke("Spawn", Random.Range(1, 3));
     }
 
     // Update is called once per frame
-    void Update()
+    void Spawn()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            GameObject a = ManagerScript.Get(0);
-            a.GetComponent<Monster>().SetPosition(new Vector2(Spawn_x, Spawn_y[Random.Range(0, Spawn_y.Length)]));
-        }
+        GameObject a = ManagerScript.Get(0);
+        a.GetComponent<Monster>().SetPosition(new Vector2(Spawn_x, Spawn_y[Random.Range(0, Spawn_y.Length)]));
+        Invoke("Spawn", Random.Range(1, 3));
     }
 }
